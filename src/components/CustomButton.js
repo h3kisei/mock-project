@@ -1,28 +1,32 @@
 import React from "react";
 
-const Button = ({ 
-    border,
-    color,
-    children,
-    height,
-    onClick, 
-    radius,
-    width
-  }) => { 
+const Button = ({
+  border,
+  color,
+  children,
+  height,
+  onClick,
+  radius,
+  width,
+  fontSize,
+  fontWeight,
+}) => {
   return (
-    <button 
+    <button
       onClick={onClick}
       style={{
-         backgroundColor: color,
-         border,
-         borderRadius: radius,
-         height,
-         width
+        backgroundColor: color,
+        border,
+        borderRadius: radius,
+        height,
+        width,
+        fontSize,
+        fontWeight,
       }}
     >
-    {children}
+      {children}
     </button>
   );
-}
+};
 
 export default Button;

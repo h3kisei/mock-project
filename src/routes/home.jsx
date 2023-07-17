@@ -4,6 +4,7 @@ import CustomModal from "../components/CustomModal";
 import Input from "../components/CustomInputText";
 import AppBar from "../components/AppBar";
 import SideBar from "../components/SideBar";
+import CustomDropdown from "../components/CustomDropdown";
 
 const Home = () => {
   return (
@@ -11,12 +12,14 @@ const Home = () => {
       <h1>Testttt</h1>
       <Button
         border="none"
-        color="pink"
-        height="200px"
-        onClick={() => console.log("You clicked on the pink circle!")}
-        radius="50%"
-        width="200px"
-        children="I'm a pink circle!"
+        color="#FFD333"
+        height="40px"
+        onClick={() => console.log("New product!")}
+        radius="5px"
+        width="150px"
+        children="New product"
+        fontSize="20px"
+        fontWeight="400"
       />
       <CustomRadio colorScheme="red" size="sm" value="1" children="Hoang" />
       <CustomModal children="Are you sure to delete" />
@@ -29,6 +32,7 @@ const Home = () => {
         width="200px"
       />
       <AppBar />
+      <CustomDropdown />
       <SideBar />
     </>
   );

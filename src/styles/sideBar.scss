@@ -1,0 +1,98 @@
+.side-bar {
+    width: 230px;
+    height: 1170px;
+    background-color: #3D464D;
+    display: flex;
+    flex-direction: column;
+
+    .side-bar-top {
+        height: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #FFD333;
+        padding: 0px 10px;
+
+        h1 {
+            font-size: 25px;
+            font-weight: 700;
+            color: #000000;
+        }
+
+        .css-1eveppl {
+            height: 18px;
+            width: 54px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+    }
+
+    .side-bar-bot {
+
+        .application {
+            padding: 0px 10px;
+            height: 55px;
+            border-top: 1px solid #E5E5E5;
+            display: flex;
+            align-items: center;
+
+            h3 {
+                font-size: 12px;
+                font-weight: 700;
+                color: #C4C4C4;
+            }
+        }
+
+        .dashboard {
+            padding: 0px 10px;
+            height: 55px;
+            border-top: 1px solid #E5E5E5;
+            display: flex;
+            align-items: center;
+
+            h2 {
+                font-size: 18px;
+                font-weight: 700;
+                color: #FFFFFF;
+                margin-left: 10px;
+            }
+        }
+
+        .side-bar-element {
+            padding: 0px 10px;
+            height: 55px;
+            border-top: 1px solid #E5E5E5;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .left {
+                display: flex;
+            align-items: center;
+            }
+
+            h2 {
+                font-size: 18px;
+                font-weight: 700;
+                color: #FFFFFF;
+                margin-left: 10px;
+            }
+
+        }
+
+        .side-bar-element-drop {
+            padding: 0px 45px;
+            height: 55px;
+            border-top: 1px solid #E5E5E5;
+            display: flex;
+            align-items: center;
+
+            h2 {
+                font-size: 18px;
+                font-weight: 700;
+                color: #FFFFFF;
+                margin-left: 10px;
+            }
+        }
+    }
+}
