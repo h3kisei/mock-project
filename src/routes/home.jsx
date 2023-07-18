@@ -4,7 +4,9 @@ import CustomModal from "../components/CustomModal";
 import Input from "../components/CustomInputText";
 import AppBar from "../components/AppBar";
 import SideBar from "../components/SideBar";
+import TopBar from "../components/TopBar";
 import CustomDropdown from "../components/CustomDropdown";
+import MainBar from "../components/MainBar";
 
 const Home = () => {
   return (
@@ -33,6 +35,8 @@ const Home = () => {
       />
       <AppBar />
       <CustomDropdown />
+      <TopBar />
+      <MainBar />
       <SideBar />
     </>
   );

@@ -15,7 +15,7 @@ const AppBar = () => {
             <InputLeftElement pointerEvents="none">
               <img src={search} alt="" />
             </InputLeftElement>
-            <Input type="tel" placeholder="Phone number" />
+            <Input type="tel" placeholder="Search" />
           </InputGroup>
         </div>
       </div>
