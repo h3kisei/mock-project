@@ -2,7 +2,7 @@ import * as types from "../constants/post";
 
 // khởi tạo một init state
 const initialState = {
-  post: [],
+  posts: [],
   loading: false,
   error: null,
 };

@@ -1,15 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "../redux/actions/postAction.js";
+import Pagination from "../components/CustomPagination";
+
+let PageSize = 10;
 
 export default function ProductList() {
   const { posts, loading } = useSelector((state) => ({ ...state.data }));
+  console.log(posts);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
+
+  const [currentPage, setCurrentPage] = useState(1);
 
   return (
     <>
@@ -27,7 +33,7 @@ export default function ProductList() {
           {!loading ? (
             posts.map((post) => {
               return (
-                <tr>
+                <tr key={post.id}>
                   <td>{post.id}</td>
                   <td>{post.name}</td>
                   <td>{post.brand}</td>
@@ -37,10 +43,17 @@ export default function ProductList() {
               );
             })
           ) : (
-            <h3>Loading...</h3>
+            <tr />
           )}
         </tbody>
       </table>
+      <Pagination
+        className="pagination-bar"
+        currentPage={currentPage}
+        totalCount={posts.length}
+        pageSize={PageSize}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
     </>
   );
 }

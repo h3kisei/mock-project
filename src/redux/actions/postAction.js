@@ -19,9 +19,16 @@ export function fetchPosts() {
   return function (dispatch) {
     dispatch(fetchPostStart());
     axios
-      .get("http://139.59.103.50:5000/v1/products")
+      .get(
+        "http://139.59.103.50:5000/v1/products"
+        //   {
+        //       headers: {
+        //           "Authorization": `Bearer ${}`
+        //       }
+        //   }
+      )
       .then((response) => {
-        const posts = response.data;
+        const posts = response.data.data.result;
         dispatch(fetchPostSuccess(posts));
       })
       .catch((error) => {
