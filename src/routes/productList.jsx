@@ -1,44 +1,61 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPosts } from "../redux/actions/postAction.js";
+import { fetchProducts } from "../redux/actions/postProducts.js";
 import Pagination from "../components/CustomPagination";
+import SearchBar from "../components/SearchBar";
 
-let PageSize = 10;
+let PageSize = 3;
 
 export default function ProductList() {
-  const { posts, loading } = useSelector((state) => ({ ...state.data }));
-  console.log(posts);
-
+  const { products, loading } = useSelector((state) => ({ ...state.data }));
+  console.log(products);
   const dispatch = useDispatch();
+  const [search, setSearch] = useState("");
+
+  const handleChangeSearch = (e) => {
+    if (e.target.value.length > 0) {
+      setCurrentPage(1);
+    }
+    setSearch(e.target.value);
+  };
 
   useEffect(() => {
-    dispatch(fetchPosts());
+    dispatch(fetchProducts());
   }, [dispatch]);
 
   const [currentPage, setCurrentPage] = useState(1);
 
+  // const indexOfLastPost = currentPage * PageSize;
+  // const indexOfFirstPost = indexOfLastPost - PageSize;
+  // const filterProducts = products.slice(indexOfFirstPost, indexOfLastPost);
+
   return (
     <>
+      <SearchBar
+        search={search}
+        setSearch={setSearch}
+        onChange={handleChangeSearch}
+      />
       <table>
         <thead>
           <tr>
             <th>ID</th>
-            <th>FIRST NAME</th>
-            <th>LAST NAME</th>
-            <th>EMAIL</th>
-            <th>PHONE</th>
+            <th>Product</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Stock</th>
           </tr>
         </thead>
         <tbody>
           {!loading ? (
-            posts.map((post) => {
+            products.map((product) => {
               return (
-                <tr key={post.id}>
-                  <td>{post.id}</td>
-                  <td>{post.name}</td>
-                  <td>{post.brand}</td>
-                  <td>{post.category}</td>
-                  <td>{post.description}</td>
+                <tr key={product.id}>
+                  <td>{product.id}</td>
+                  <td>{product.name}</td>
+                  <td>{product.brand}</td>
+                  <td>{product.category}</td>
+                  <td>{product.description}</td>
                 </tr>
               );
             })
@@ -50,7 +67,7 @@ export default function ProductList() {
       <Pagination
         className="pagination-bar"
         currentPage={currentPage}
-        totalCount={posts.length}
+        totalCount={products.length}
         pageSize={PageSize}
         onPageChange={(page) => setCurrentPage(page)}
       />

@@ -3,6 +3,7 @@ import * as types from "../constants/post";
 // khởi tạo một init state
 const initialState = {
   posts: [],
+  searchResults: [],
   loading: false,
   error: null,
 };
@@ -26,6 +27,12 @@ function postReducer(state = initialState, action) {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    case types.SEARCH_POSTS:
+      return {
+        ...state,
+        posts: action.payload,
+        page: 1,
       };
 
     default:

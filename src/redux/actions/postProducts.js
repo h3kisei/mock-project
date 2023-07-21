@@ -5,9 +5,9 @@ const fetchPostStart = () => ({
   type: types.FETCH_POST_START,
 });
 
-const fetchPostSuccess = (posts) => ({
+const fetchPostSuccess = (products) => ({
   type: types.FETCH_POST_SUCCESS,
-  payload: posts,
+  payload: products,
 });
 
 const fetchPostFail = (error) => ({
@@ -15,7 +15,7 @@ const fetchPostFail = (error) => ({
   payload: error,
 });
 
-export function fetchPosts() {
+export function fetchProducts() {
   return function (dispatch) {
     dispatch(fetchPostStart());
     axios
@@ -28,11 +28,21 @@ export function fetchPosts() {
         //   }
       )
       .then((response) => {
-        const posts = response.data.data.result;
-        dispatch(fetchPostSuccess(posts));
+        const products = response.data.data.result;
+        dispatch(fetchPostSuccess(products));
       })
       .catch((error) => {
         dispatch(fetchPostFail(error.message));
       });
   };
 }
+
+export const searchProducts = (query) => (dispatch, getState) => {
+  console.log(query);
+  const { postReducer } = getState();
+  const searchResults = postReducer().searchResults.filter((product) =>
+    product.name.toLowerCase().includes(query.toLowerCase())
+  );
+  console.log(searchResults);
+  dispatch({ type: types.SEARCH_POSTS, payload: searchResults });
+};
