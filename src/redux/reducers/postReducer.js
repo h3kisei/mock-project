@@ -1,14 +1,14 @@
 import * as types from "../constants/post";
 
-// khởi tạo một init state
 const initialState = {
-  posts: [],
-  searchResults: [],
+  data: [],
+  total: 0,
+  currentPage: 1,
   loading: false,
   error: null,
+  keyword: "",
 };
 
-// bắt từng action type
 function postReducer(state = initialState, action) {
   switch (action.type) {
     case types.FETCH_POST_START:
@@ -17,10 +17,11 @@ function postReducer(state = initialState, action) {
         loading: true,
       };
     case types.FETCH_POST_SUCCESS:
+      // since action.payload is {data, total, currentPage}
       return {
         ...state,
         loading: false,
-        posts: action.payload,
+        ...action.payload,
       };
     case types.FETCH_POST_FAIL:
       return {
@@ -28,13 +29,19 @@ function postReducer(state = initialState, action) {
         loading: false,
         error: action.payload,
       };
-    case types.SEARCH_POSTS:
+
+    case types.SET_CURRENT_PAGE:
       return {
         ...state,
-        posts: action.payload,
-        page: 1,
+        currentPage: action.payload,
       };
 
+    case types.SEARCH_PRODUCTS:
+      return {
+        ...state,
+        ...action.payload,
+        loading: false,
+      };
     default:
       return state;
   }
