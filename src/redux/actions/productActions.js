@@ -25,6 +25,11 @@ const searchProducts = (products) => ({
   payload: products,
 });
 
+export const setKeyword = (keyword) => ({
+  type: types.SET_KEYWORD,
+  payload: keyword,
+});
+
 export function searchListProducts({ keyword, page = 1, size = 10 }) {
   return function (dispatch) {
     axios
@@ -34,9 +39,9 @@ export function searchListProducts({ keyword, page = 1, size = 10 }) {
       .then((response) => {
         const { data } = response.data || {};
         const products = {
-          data: data.product.result,
-          total: data.total,
-          currentPage: data.currentPage,
+          products: data.product.result,
+          total: data.product.total,
+          currentPage: data.product.currentPage,
         };
         dispatch(searchProducts(products));
       })

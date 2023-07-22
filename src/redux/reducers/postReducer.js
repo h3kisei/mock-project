@@ -42,6 +42,12 @@ function postReducer(state = initialState, action) {
         ...action.payload,
         loading: false,
       };
+
+    case types.SET_KEYWORD:
+      return {
+        ...state,
+        keyword: action.payload,
+      };
     default:
       return state;
   }

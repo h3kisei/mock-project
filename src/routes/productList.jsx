@@ -4,6 +4,7 @@ import {
   fetchProducts,
   searchListProducts,
   setCurrentPage,
+  setKeyword,
 } from "../redux/actions/productActions";
 import Pagination from "../components/CustomPagination";
 
@@ -17,37 +18,34 @@ export default function ProductList() {
   );
 
   const dispatch = useDispatch();
-  const [searchKeyword, setSearchKeyword] = useState("");
 
   const handleChangePage = (page) => {
     dispatch(setCurrentPage(page));
   };
 
   const handleKeywordPress = (e) => {
-    setSearchKeyword(e.target.value);
+    dispatch(setKeyword(e.target.value));
   };
 
   useEffect(() => {
     dispatch(fetchProducts({ page: currentPage, size: PAGE_SIZE }));
   }, [dispatch, currentPage]);
 
-  useEffect(() => {
+  const handleSearch = () => {
     dispatch(
       searchListProducts({
-        keyword: searchKeyword,
+        keyword,
         page: currentPage,
         size: PAGE_SIZE,
       })
     );
-  }, [dispatch, currentPage, keyword]);
-
+  };
   return (
     <>
       <form className="form-inline">
         <div className="col-auto">
           <input
             type="text"
-            value={searchKeyword}
             onChange={handleKeywordPress}
             className="form-control"
             placeholder="Từ khoá"
@@ -55,15 +53,7 @@ export default function ProductList() {
         </div>
         <button
           type="button"
-          onClick={() =>
-            dispatch(
-              searchListProducts({
-                keyword: searchKeyword,
-                page: currentPage,
-                size: PAGE_SIZE,
-              })
-            )
-          }
+          onClick={handleSearch}
           className="btn btn-primary my-1"
         >
           Tìm kiếm
