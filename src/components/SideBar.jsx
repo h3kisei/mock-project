@@ -6,6 +6,8 @@ import settings from "../assets/settings.png";
 import arrow from "../assets/arrow-down.png";
 import { Tag } from "@chakra-ui/react";
 import "../styles/sideBar.scss";
+import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import React from "react";
 
 const SideBar = () => {
   return (

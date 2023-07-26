@@ -29,7 +29,7 @@ import Input from "../components/CustomInputText";
 
 let PAGE_SIZE = 5;
 
-export default function ProductList() {
+export default function UserList() {
   const { data, loading, total, currentPage, keyword } = useSelector(
     (state) => ({
       ...state.products,
@@ -79,7 +79,7 @@ export default function ProductList() {
               <BreadcrumbLink href="/">Dashboard</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink href="/product-list">Product</BreadcrumbLink>
+              <BreadcrumbLink href="/product-list">User</BreadcrumbLink>
             </BreadcrumbItem>
           </Breadcrumb>
           <div className="product-bar">

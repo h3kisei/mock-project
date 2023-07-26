@@ -1,17 +1,17 @@
 import * as types from "../constants/post";
 import axios from "axios";
 
-const fetchPostStart = () => ({
-  type: types.FETCH_POST_START,
+const fetchProductStart = () => ({
+  type: types.FETCH_PRODUCT_START,
 });
 
-const fetchPostSuccess = (products) => ({
-  type: types.FETCH_POST_SUCCESS,
+const fetchProductSuccess = (products) => ({
+  type: types.FETCH_PRODUCT_SUCCESS,
   payload: products,
 });
 
-const fetchPostFail = (error) => ({
-  type: types.FETCH_POST_FAIL,
+const fetchProductFail = (error) => ({
+  type: types.FETCH_PRODUCT_FAIL,
   payload: error,
 });
 
@@ -39,21 +39,21 @@ export function searchListProducts({ keyword, page = 1, size = 10 }) {
       .then((response) => {
         const { data } = response.data || {};
         const products = {
-          products: data.product.result,
-          total: data.product.total,
-          currentPage: data.product.currentPage,
+          data: data.products.result,
+          total: data.products.total,
+          currentPage: data.products.currentPage,
         };
         dispatch(searchProducts(products));
       })
       .catch((error) => {
-        dispatch(fetchPostFail(error.message));
+        dispatch(fetchProductFail(error.message));
       });
   };
 }
 
 export function fetchProducts({ page = 1, size = 10 }) {
   return function (dispatch) {
-    dispatch(fetchPostStart());
+    dispatch(fetchProductStart());
     axios
       .get(`http://139.59.103.50:5000/v1/products?page=${page}&size=${size}`)
       .then((response) => {
@@ -63,10 +63,10 @@ export function fetchProducts({ page = 1, size = 10 }) {
           total: data.total,
           currentPage: data.currentPage,
         };
-        dispatch(fetchPostSuccess(products));
+        dispatch(fetchProductSuccess(products));
       })
       .catch((error) => {
-        dispatch(fetchPostFail(error.message));
+        dispatch(fetchProductFail(error.message));
       });
   };
 }

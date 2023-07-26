@@ -9,21 +9,21 @@ const initialState = {
   keyword: "",
 };
 
-function postReducer(state = initialState, action) {
+function productReducer(state = initialState, action) {
   switch (action.type) {
-    case types.FETCH_POST_START:
+    case types.FETCH_PRODUCT_START:
       return {
         ...state,
         loading: true,
       };
-    case types.FETCH_POST_SUCCESS:
+    case types.FETCH_PRODUCT_SUCCESS:
       // since action.payload is {data, total, currentPage}
       return {
         ...state,
         loading: false,
         ...action.payload,
       };
-    case types.FETCH_POST_FAIL:
+    case types.FETCH_PRODUCT_FAIL:
       return {
         ...state,
         loading: false,
@@ -53,4 +53,4 @@ function postReducer(state = initialState, action) {
   }
 }
 
-export default postReducer;
+export default productReducer;

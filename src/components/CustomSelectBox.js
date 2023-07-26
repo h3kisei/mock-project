@@ -1,66 +1,24 @@
-import { ErrorMessage } from "formik";
-import PropTypes from "prop-types";
-import React from "react";
-import Select from "react-select";
-import { FormFeedback, FormGroup, Label } from "reactstrap";
+import Select, { components } from "react-select";
 
-SelectField.propTypes = {
-  field: PropTypes.object.isRequired,
-  form: PropTypes.object.isRequired,
-
-  label: PropTypes.string,
-  placeholder: PropTypes.string,
-  disabled: PropTypes.bool,
-  options: PropTypes.array,
-};
-
-SelectField.defaultProps = {
-  label: "",
-  placeholder: "",
-  disabled: false,
-  options: [],
-};
-
-function SelectField(props) {
-  const { field, form, options, label, placeholder, disabled } = props;
-  const { name, value } = field;
-  const { errors, touched } = form;
-  const showError = errors[name] && touched[name];
-
-  const selectedOption = options.find((option) => option.value === value);
-
-  const handleSelectedOptionChange = (selectedOption) => {
-    const selectedValue = selectedOption
-      ? selectedOption.value
-      : selectedOption;
-
-    const changeEvent = {
-      target: {
-        name: name,
-        value: selectedValue,
-      },
-    };
-    field.onChange(changeEvent);
-  };
-
+const Option = (props) => {
   return (
-    <FormGroup>
-      {label && <Label for={name}>{label}</Label>}
-
-      <Select
-        id={name}
-        {...field}
-        value={selectedOption}
-        onChange={handleSelectedOptionChange}
-        placeholder={placeholder}
-        isDisabled={disabled}
-        options={options}
-        className={showError ? "is-invalid" : ""}
-      />
-
-      <ErrorMessage name={name} component={FormFeedback} />
-    </FormGroup>
+    <div style={{ display: "flex" }}>
+      <components.Option {...props} />
+    </div>
   );
-}
+};
+const options = [
+  { label: "Processing", value: 1 },
+  { label: "shipping", value: 2 },
+  // { label: "Option 3", value: 3 }
+];
 
-export default SelectField;
+const CustomSelect = () => {
+  return (
+    <div>
+      <Select options={options} components={{ Option }} />
+    </div>
+  );
+};
+
+export default CustomSelect;

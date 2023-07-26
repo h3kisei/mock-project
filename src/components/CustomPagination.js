@@ -2,6 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import { usePagination, DOTS } from "./usePagination";
 import "../styles/customPagination.scss";
+import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 const Pagination = (props) => {
   const {
     onPageChange,
@@ -42,7 +43,9 @@ const Pagination = (props) => {
         })}
         onClick={onPrevious}
       >
-        <div>prev</div>
+        <div>
+          <ChevronLeftIcon />
+        </div>
       </li>
       {paginationRange.map((pageNumber) => {
         if (pageNumber === DOTS) {
@@ -71,7 +74,9 @@ const Pagination = (props) => {
         })}
         onClick={onNext}
       >
-        <div>next</div>
+        <div>
+          <ChevronRightIcon />
+        </div>
       </li>
     </ul>
   );

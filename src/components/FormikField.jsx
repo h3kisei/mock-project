@@ -1,6 +1,7 @@
 import React from "react";
 import { Field } from "formik";
 import FormikErrorMessage from "./FormikErrorMessage";
+import "../styles/login.scss";
 
 const FormikField = ({ name, type, label }) => {
   return (
@@ -18,7 +19,9 @@ const FormikField = ({ name, type, label }) => {
               defaultChecked={formikField.field.value}
             />
             <FormikErrorMessage name={name} />
-            <pre>{JSON.stringify(formikField, null, 4)}</pre>
+            <div className="pre">
+              <pre>{JSON.stringify(formikField, null, 4)}</pre>
+            </div>
           </>
         );
       }}
