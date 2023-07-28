@@ -1,0 +1,51 @@
+.home {
+    .main-home {
+        padding: 10px 145px;
+        .ads {
+            display: flex;
+            .pic {
+                display: flex;
+                flex-direction: column;
+                margin-left: 10px;
+    
+                .under {
+                    display: flex;
+                    justify-content: space-between;
+                    width: 860px;
+                    margin-top: 10px;
+                }
+            }
+        }
+
+        .benefit {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+
+            .ship {
+                border: 1px solid #DFD8D8;
+                border-radius: 5px;
+                background-color: #F8F8F8;
+                width: 280px;
+                height: 95px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .text {
+                    margin-left: 12px;
+
+                    h1 {
+                        font-size: 24px;
+                        font-weight: 700;
+                    }
+
+                    h2 {
+                        font-size: 14px;
+                        font-weight: 400;
+                    }
+                }
+            }
+        }
+    }
+}

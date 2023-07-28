@@ -1,45 +1,58 @@
-import Button from "../components/CustomButton";
-import CustomRadio from "../components/CustomRadio";
-import CustomModal from "../components/CustomModal";
-import Input from "../components/CustomInputText";
-import AppBar from "../components/AppBar";
-import SideBar from "../components/SideBar";
-import TopBar from "../components/TopBar";
-import CustomDropdown from "../components/CustomDropdown";
+import Category from "../components/Category";
 import MainBar from "../components/MainBar";
+import carousel from "../assets/Carousel.png";
+import ship from "../assets/ship.png";
+import "../styles/home.scss";
+import Card from "../components/Card";
 
-const Home = () => {
+export default function Home() {
   return (
-    <>
-      <h1>Testttt</h1>
-      <Button
-        border="none"
-        color="#FFD333"
-        height="40px"
-        onClick={() => console.log("New product!")}
-        radius="5px"
-        width="150px"
-        children="New product"
-        fontSize="20px"
-        fontWeight="400"
-      />
-      <CustomRadio colorScheme="red" size="sm" value="1" children="Hoang" />
-      <CustomModal children="Are you sure to delete" />
-      <Input
-        type="email"
-        label="Email"
-        name="email"
-        placeholder="Please enter your email"
-        border="1px"
-        width="200px"
-      />
-      <AppBar />
-      <CustomDropdown />
-      <TopBar />
+    <div className="home">
       <MainBar />
-      <SideBar />
-    </>
+      <div className="main-home">
+        <div className="ads">
+          <Category />
+          <div className="pic">
+            <img style={{ width: 860, height: 380 }} src={carousel} alt="" />
+            <div className="under">
+              <img style={{ width: 280, height: 224 }} src={carousel} alt="" />
+              <img style={{ width: 280, height: 224 }} src={carousel} alt="" />
+              <img style={{ width: 280, height: 224 }} src={carousel} alt="" />
+            </div>
+          </div>
+        </div>
+        <div className="benefit">
+          <div className="ship">
+            <img src={ship} alt="" />
+            <div className="text">
+              <h1>Free Shipping</h1>
+              <h2>For order from %50</h2>
+            </div>
+          </div>
+          <div className="ship">
+            <img src={ship} alt="" />
+            <div className="text">
+              <h1>Free Shipping</h1>
+              <h2>For order from %50</h2>
+            </div>
+          </div>
+          <div className="ship">
+            <img src={ship} alt="" />
+            <div className="text">
+              <h1>Free Shipping</h1>
+              <h2>For order from %50</h2>
+            </div>
+          </div>
+          <div className="ship">
+            <img src={ship} alt="" />
+            <div className="text">
+              <h1>Free Shipping</h1>
+              <h2>For order from %50</h2>
+            </div>
+          </div>
+        </div>
+        <Card />
+      </div>
+    </div>
   );
-};
-
-export default Home;
+}

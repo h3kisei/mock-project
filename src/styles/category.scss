@@ -1,0 +1,41 @@
+.category {
+    height: 615px;
+    width: 280px;
+    background-color: #3D464D;
+
+    .title {
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+        height: 90px;
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-left: 15px;
+        }
+    }
+
+    .menu {
+        .element {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-left: 20px;
+            padding-right: 15px;
+            background-color: #3D464D;
+
+            &:hover {
+                background-color: #B59628;
+            }
+
+            h2 {
+                font-size: 22px;
+                font-weight: 700;
+                color: #FFFFFF;
+            }
+        }
+    }
+}

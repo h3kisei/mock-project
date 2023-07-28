@@ -29,41 +29,28 @@ const setMessage = (message) => ({
   payload: message,
 });
 
-export function register(username, email, password) {
+export function register(data) {
   return function (dispatch) {
     axios
-      .post("http://139.59.103.50:5000/v1/auth/" + "register", {
-        username,
-        email,
-        password,
-      })
-      .then((response) => {
+      .post(`http://139.59.103.50:5000/v1/auth/register`, data)
+      .then(() => {
         dispatch(registerSuccess());
-        dispatch(setMessage(response.data.message));
-        return Promise.resolve();
       })
       .catch((error) => {
         dispatch(registerFail(error.message));
       });
-
-    return Promise.reject();
   };
 }
 
-export function login(email, password) {
+export function login(data) {
   return function (dispatch) {
     axios
-      .post("http://139.59.103.50:5000/v1/auth/" + "login", {
-        email,
-        password,
-      })
-      .then((response) => {
-        if (response.data.accessToken) {
-          localStorage.setItem("user", JSON.stringify(response.data));
+      .post(`http://139.59.103.50:5000/v1/auth/login`, data)
+      .then(({ data }) => {
+        if (data.status === 200) {
+          localStorage.setItem("user", JSON.stringify(data.data));
           dispatch(loginSuccess());
         }
-
-        return response.data;
       })
       .catch((error) => {
         dispatch(loginFail(error.message));

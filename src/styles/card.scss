@@ -1,0 +1,61 @@
+.list-card {
+    display: block;
+
+    .card {
+        width: 300px;
+        height: 400px;
+        border: 1px solid #B4B1B1;
+        background-color: #FFFCFC;
+        border-radius: 5px;
+        padding-left: 25px;
+        padding-right: 25px;
+
+        .in-card {
+            display: flex;
+            flex-direction: column;
+
+            h1 {
+                font-size: 32px;
+                font-weight: 700;
+            }
+            h2 {
+                font-size: 16px;
+                font-weight: 700;
+            }
+
+            .rating-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                span {
+                    font-size: 16px;
+                    font-weight: 700;
+                    color: #D70000;
+                }
+            }
+            .price-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                h4 {
+                    font-size: 24px;
+                    font-weight: 700;
+                }
+            }
+
+            .css-m6gpa9 {
+                width: 100px;
+                height: 25px;
+                border-radius: 10px;
+                border: 1px solid rgba(0, 202, 20, 0.5);
+                background-color: rgba(0, 167, 17, 0.5);
+                color: #FFFFFF;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+}

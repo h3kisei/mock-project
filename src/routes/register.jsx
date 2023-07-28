@@ -3,15 +3,17 @@ import * as yup from "yup";
 import FormikField from "../components/FormikField";
 import { useDispatch } from "react-redux";
 import "../styles/login.scss";
-import { login } from "../redux/actions/authActions";
+import { register } from "../redux/actions/authActions";
 import React, { useEffect } from "react";
 
-const Login = (onClose) => {
+const Register = () => {
   const initialValues = {
+    username: "",
     email: "",
     password: "",
   };
   const validationSchema = yup.object({
+    username: yup.string().required("Username field is required"),
     email: yup
       .string()
       .email("Please enter a valid email address")
@@ -21,8 +23,7 @@ const Login = (onClose) => {
 
   const dispatch = useDispatch();
   const onSubmit = (values) => {
-    dispatch(login({ ...values, deviceId: "deviceId-hieu1x@gmail.com" }));
-    onClose();
+    dispatch(register({ ...values }));
   };
 
   return (
@@ -35,6 +36,7 @@ const Login = (onClose) => {
         return (
           <Form>
             <div style={{ padding: 20 }}>
+              <FormikField label="Username" name="username" type="username" />
               <FormikField label="Email" name="email" type="email" />
               <FormikField label="Password" name="password" type="password" />
               <button style={{ display: "block" }}>submit</button>
@@ -48,4 +50,4 @@ const Login = (onClose) => {
     </Formik>
   );
 };
-export default Login;
+export default Register;
