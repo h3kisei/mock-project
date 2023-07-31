@@ -1,6 +1,6 @@
 .side-bar {
-    width: 230px;
-    height: 1170px;
+    min-width: 230px;
+    height: 1024px;
     background-color: #3D464D;
     display: flex;
     flex-direction: column;
@@ -86,6 +86,10 @@
             border-top: 1px solid #E5E5E5;
             display: flex;
             align-items: center;
+
+            &:hover {
+                background-color: #FFD333;
+            }
 
             h2 {
                 font-size: 18px;

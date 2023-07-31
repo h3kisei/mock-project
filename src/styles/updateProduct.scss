@@ -1,0 +1,197 @@
+.updateProduct {
+    display: flex;
+
+    .rightScreen {
+        display: flex;
+        flex-direction: column;
+
+        .below-appbar {
+            padding: 35px;
+            background-color: #F8F8FF;
+            height: 944px;
+
+            .chakra-breadcrumb.css-14go5ty {
+                color: #929395;
+                font-size: 18px;
+                font-weight: 400;
+            }
+
+            .update-product-bar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 20px;
+        
+                h1 {
+                    font-size: 35px;
+                    font-weight: 600;
+                    color: #000000;
+                }
+            }
+
+            .content {
+                display: flex;
+                justify-content: space-between;
+
+                .left-content {
+                    width: 670px;
+                    height: 760px;
+                    box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
+                    background-color: #FFFFFF;
+
+                    .top-left {
+                        height: 55px;
+                        border-bottom: 1px solid rgba(146, 147, 149, 1);
+                        padding: 0px 25px;
+                        display: flex;
+                        align-items: center;
+
+                        h1 {
+                            font-size: 22px;
+                            font-weight: 700;
+                        }
+                    }
+
+                    .bot-left {
+                        padding: 0px 25px;
+
+                        .input {
+                            margin-top: 15px;
+
+                            h2 {
+                                font-size: 18px;
+                                font-weight: 700;
+                            }
+
+                            .chakra-numberinput {
+                                width: 620px;
+                                margin-top: 10px;
+
+                                .chakra-numberinput__field.css-1551roq {
+                                    border-radius: 2px !important;
+                                    border: 1px solid #929395 !important;
+                                }
+                            }
+                        }
+
+                        .number-input {
+                            display: flex;
+                            justify-content: space-between;
+
+                            h2 {
+                                font-size: 18px;
+                                font-weight: 700;
+                            }
+
+                            .chakra-numberinput {
+                                width: 280px;
+                                margin-top: 10px;
+                                
+                                .chakra-numberinput__field.css-1551roq {
+                                    border-radius: 2px !important;
+                                    border: 1px solid #929395 !important;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                .right-content {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+
+                    .images {
+                        width: 445px;
+                        height: 260px;
+                        box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
+                        background-color: #FFFFFF;
+    
+                        .top-images {
+                            height: 55px;
+                            border-bottom: 1px solid rgba(146, 147, 149, 1);
+                            padding: 0px 25px;
+                            display: flex;
+                            align-items: center;
+    
+                            h1 {
+                                font-size: 22px;
+                                font-weight: 700;
+                            }
+                        }
+    
+                        .bot-images {
+                            display: flex;
+                            align-items: center;
+                            flex-direction: column;
+                            justify-content: space-between;
+                            padding: 25px;
+                            height: 205px;
+                        }
+                    }
+                    .categories {
+                        width: 445px;
+                        height: 200px;
+                        box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
+                        background-color: #FFFFFF;
+    
+                        .top-categories {
+                            height: 55px;
+                            border-bottom: 1px solid rgba(146, 147, 149, 1);
+                            padding: 0px 25px;
+                            display: flex;
+                            align-items: center;
+    
+                            h1 {
+                                font-size: 22px;
+                                font-weight: 700;
+                            }
+                        }
+    
+                        .bot-categories {
+                            padding: 0px 25px;
+    
+                        }
+                    }
+                    .rating {
+                        width: 445px;
+                        height: 240px;
+                        box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
+                        background-color: #FFFFFF;
+    
+                        .top-rating {
+                            height: 55px;
+                            border-bottom: 1px solid rgba(146, 147, 149, 1);
+                            padding: 0px 25px;
+                            display: flex;
+                            align-items: center;
+    
+                            h1 {
+                                font-size: 22px;
+                                font-weight: 700;
+                            }
+                        }
+    
+                        .bot-rating {
+                            padding: 25px;
+
+                            .css-13cymwt-control {
+                                border-radius: 2px;
+                                border: 1px solid #929395;
+                                .css-qbdosj-Input {
+                                    input {
+                                        grid-area: auto;
+                                    }
+                                }
+                            }
+                             
+                        }
+                    }
+
+                }
+            
+            }
+        }
+
+    }
+}

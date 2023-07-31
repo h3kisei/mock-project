@@ -10,6 +10,7 @@ import {
   Th,
   Thead,
   Tr,
+  Tag,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,14 +20,14 @@ import Button from "../components/CustomButton";
 import Input from "../components/CustomInputText";
 import Pagination from "../components/CustomPagination";
 import SideBar from "../components/SideBar";
-import { fetchUsers, setCurrentPage } from "../redux/actions/userActions";
+import { fetchOrders, setCurrentPage } from "../redux/actions/orderActions";
 import "../styles/productList.scss";
 
-let PAGE_SIZE = 5;
+let PAGE_SIZE = 1;
 
 export default function UserList() {
   const { data, loading, total, currentPage } = useSelector((state) => ({
-    ...state.users,
+    ...state.orders,
   }));
   const dispatch = useDispatch();
 
@@ -35,7 +36,7 @@ export default function UserList() {
   };
 
   useEffect(() => {
-    dispatch(fetchUsers({ page: currentPage, size: PAGE_SIZE }));
+    dispatch(fetchOrders({ page: currentPage, size: PAGE_SIZE }));
   }, [dispatch, currentPage]);
 
   return (
@@ -49,29 +50,18 @@ export default function UserList() {
               <BreadcrumbLink href="/">Dashboard</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink href="/user-list">User</BreadcrumbLink>
+              <BreadcrumbLink href="/user-list">Order</BreadcrumbLink>
             </BreadcrumbItem>
           </Breadcrumb>
           <div className="product-bar">
-            <h1>User</h1>
-            <Button
-              border="none"
-              color="#FFD333"
-              height="40px"
-              onClick={() => console.log("New product!")}
-              radius="5px"
-              width="150px"
-              children="New User"
-              fontSize="20px"
-              fontWeight="600"
-            />
+            <h1>Order</h1>
           </div>
           <div className="content">
             <div className="search">
               <Input
                 type="text"
                 name="search"
-                placeholder="Search Users"
+                placeholder="Search Orders"
                 border="1px"
                 borderColor="#C4C4C4"
                 borderStyle="solid"
@@ -92,7 +82,19 @@ export default function UserList() {
                     </Th>
                     <Th>
                       <div className="th">
-                        <h1>User</h1>
+                        <h1>User ID</h1>
+                        <img src={sort} alt="" />
+                      </div>
+                    </Th>
+                    <Th>
+                      <div className="th">
+                        <h1>Amount</h1>
+                        <img src={sort} alt="" />
+                      </div>
+                    </Th>
+                    <Th>
+                      <div className="th">
+                        <h1>Address</h1>
                         <img src={sort} alt="" />
                       </div>
                     </Th>
@@ -104,19 +106,19 @@ export default function UserList() {
                     </Th>
                     <Th>
                       <div className="th">
+                        <h1>Date</h1>
+                        <img src={sort} alt="" />
+                      </div>
+                    </Th>
+                    <Th>
+                      <div className="th">
+                        <h1>Paided</h1>
+                        <img src={sort} alt="" />
+                      </div>
+                    </Th>
+                    <Th>
+                      <div className="th">
                         <h1>Status</h1>
-                        <img src={sort} alt="" />
-                      </div>
-                    </Th>
-                    <Th>
-                      <div className="th">
-                        <h1>Verify Email</h1>
-                        <img src={sort} alt="" />
-                      </div>
-                    </Th>
-                    <Th>
-                      <div className="th">
-                        <h1>Verify Contact</h1>
                         <img src={sort} alt="" />
                       </div>
                     </Th>
@@ -125,33 +127,25 @@ export default function UserList() {
                 </Thead>
                 <Tbody>
                   {!loading ? (
-                    data.map((user) => {
+                    data.map((order) => {
                       return (
-                        <tr key={user.id}>
-                          <td>{user.id}</td>
+                        <tr key={order.id}>
+                          <td>{order.id}</td>
+                          <td>{order.userID}</td>
+                          <td>{order.totalPrice}</td>
+                          <td>{order.address}</td>
+                          <td>{order.contact}</td>
+                          <td>{order.date}</td>
                           <td>
-                            <div className="product">
-                              <img
-                                style={{ width: 60, height: 60 }}
-                                src={user.avatar}
-                                alt=""
-                              />
-                              <div className="info">
-                                <h1>{user.username}</h1>
-                                <h2>{user.email}</h2>
-                              </div>
-                            </div>
+                            <Tag
+                              colorScheme={
+                                order.isPaid === true ? "#FFD333" : "#366AB8"
+                              }
+                            >
+                              {order.isPaid === true ? "Yes" : "No"}
+                            </Tag>
                           </td>
-                          <td>{user.contact}</td>
-                          <td>
-                            {user.isActive === true ? "Active" : "Disable"}
-                          </td>
-                          <td>
-                            {user.isEmailVerified === true ? "Yes" : "No"}
-                          </td>
-                          <td>
-                            {user.isContactVerified === true ? "Yes" : "No"}
-                          </td>
+                          <td>{order.status}</td>
                           <td>
                             <div className="icon-button">
                               <IconButton

@@ -51,6 +51,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <h3>Best Sellers</h3>
         <Card />
       </div>
     </div>

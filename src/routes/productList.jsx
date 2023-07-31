@@ -23,6 +23,7 @@ import {
   searchListProducts,
   setCurrentPage,
   setKeyword,
+  deleteProductByID,
 } from "../redux/actions/productActions";
 import "../styles/productList.scss";
 import Input from "../components/CustomInputText";
@@ -45,6 +46,11 @@ export default function ProductList() {
     dispatch(setKeyword(e.target.value));
   };
 
+  const handleDelete = (productId) => {
+    dispatch(deleteProductByID(productId));
+    console.log(productId);
+  };
+
   useEffect(() => {
     if (!keyword) {
       dispatch(fetchProducts({ page: currentPage, size: PAGE_SIZE }));
@@ -57,7 +63,7 @@ export default function ProductList() {
         })
       );
     }
-  }, [dispatch, currentPage]);
+  }, [dispatch, currentPage, total]);
 
   const handleSearch = () => {
     dispatch(
@@ -68,6 +74,7 @@ export default function ProductList() {
       })
     );
   };
+
   return (
     <div className="productList">
       <SideBar />
@@ -76,7 +83,7 @@ export default function ProductList() {
         <div className="below-appbar">
           <Breadcrumb fontWeight="medium" fontSize="sm">
             <BreadcrumbItem>
-              <BreadcrumbLink href="/">Dashboard</BreadcrumbLink>
+              <BreadcrumbLink href="/product">Dashboard</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem isCurrentPage>
               <BreadcrumbLink href="/product-list">Product</BreadcrumbLink>
@@ -168,7 +175,7 @@ export default function ProductList() {
                   {!loading ? (
                     data.map((product) => {
                       return (
-                        <tr key={product.id}>
+                        <tr className="tr" key={product.id}>
                           <td>{product.id}</td>
                           <td>
                             <div className="product">
@@ -198,6 +205,7 @@ export default function ProductList() {
                               <IconButton
                                 aria-label="Delete Product"
                                 variant="unstyled"
+                                onClick={() => handleDelete(product.id)}
                                 icon={<DeleteIcon />}
                               />
                             </div>

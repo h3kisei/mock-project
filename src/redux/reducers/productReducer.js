@@ -7,6 +7,8 @@ const initialState = {
   loading: false,
   error: null,
   keyword: "",
+  product: [],
+  image: [],
 };
 
 function productReducer(state = initialState, action) {
@@ -30,6 +32,19 @@ function productReducer(state = initialState, action) {
         error: action.payload,
       };
 
+    case types.CREATE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        product: action.payload,
+      };
+    case types.CREATE_PRODUCT_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
     case types.SET_CURRENT_PAGE:
       return {
         ...state,
@@ -47,6 +62,25 @@ function productReducer(state = initialState, action) {
       return {
         ...state,
         keyword: action.payload,
+      };
+
+    case types.DELETE_PRODUCT:
+      return {
+        ...state,
+        ...action.payload,
+      };
+
+    case types.UPLOAD_IMAGE:
+      return {
+        ...state,
+        image: action.payload,
+      };
+
+    case types.UPLOAD_IMAGE_FAIL:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
       };
     default:
       return state;

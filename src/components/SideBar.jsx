@@ -8,6 +8,7 @@ import { Tag } from "@chakra-ui/react";
 import "../styles/sideBar.scss";
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
   return (
@@ -45,7 +46,9 @@ const SideBar = () => {
           <img src={arrow} alt="" />
         </div>
         <div className="side-bar-element-drop">
-          <h2>User List</h2>
+          <Link to="/user-list">
+            <h2>User List</h2>
+          </Link>
         </div>
         <div className="side-bar-element-drop">
           <h2>Add User</h2>
