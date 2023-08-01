@@ -6,13 +6,13 @@ import {
   NumberDecrementStepper,
 } from "@chakra-ui/react";
 
-const NumberInputPrice = ({ onPrice }) => {
+const NumberInputPrice = ({ onPrice, defaultValue }) => {
   const handlePrice = (value) => {
     onPrice && onPrice(value);
   };
 
   return (
-    <NumberInput onChange={handlePrice}>
+    <NumberInput onChange={handlePrice} defaultValue={defaultValue}>
       <NumberInputField />
       <NumberInputStepper>
         <NumberIncrementStepper />

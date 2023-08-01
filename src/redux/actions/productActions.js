@@ -26,7 +26,7 @@ const fetchProductFail = (error) => ({
 });
 
 const getProduct = (product) => ({
-  type: types.GET_PRODUCT,
+  type: types.GET_PRODUCT_BY_ID,
   payload: product,
 });
 
@@ -128,6 +128,27 @@ export function createProduct({
       })
       .catch((error) => {
         dispatch(createProductFail(error.message));
+      });
+  };
+}
+
+export function getProductById(productId) {
+  const user = JSON.parse(localStorage.getItem("user"));
+  return function (dispatch) {
+    axios
+      .get(`http://139.59.103.50:5000/v1/products/${productId}`, {
+        headers: {
+          Authorization: `Bearer ${user.tokens.access.token}`,
+        },
+      })
+      .then((response) => {
+        const { data } = response.data || {};
+        console.log(data);
+        const product = {
+          data: data.product.product,
+          productId: data.product.product.id,
+        };
+        dispatch(getProduct(product));
       });
   };
 }

@@ -19,7 +19,13 @@ function productReducer(state = initialState, action) {
         loading: true,
       };
     case types.FETCH_PRODUCT_SUCCESS:
-      // since action.payload is {data, total, currentPage}
+      return {
+        ...state,
+        loading: false,
+        ...action.payload,
+      };
+
+    case types.GET_PRODUCT_BY_ID:
       return {
         ...state,
         loading: false,

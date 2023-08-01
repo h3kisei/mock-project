@@ -24,9 +24,11 @@ import {
   setCurrentPage,
   setKeyword,
   deleteProductByID,
+  getProductById,
 } from "../redux/actions/productActions";
 import "../styles/productList.scss";
 import Input from "../components/CustomInputText";
+import { Link } from "react-router-dom";
 
 let PAGE_SIZE = 5;
 
@@ -48,6 +50,10 @@ export default function ProductList() {
 
   const handleDelete = (productId) => {
     dispatch(deleteProductByID(productId));
+  };
+
+  const handleNavigateUpdate = (productId) => {
+    dispatch(getProductById(productId));
     console.log(productId);
   };
 
@@ -63,7 +69,7 @@ export default function ProductList() {
         })
       );
     }
-  }, [dispatch, currentPage, total]);
+  }, [dispatch, currentPage]);
 
   const handleSearch = () => {
     dispatch(
@@ -197,11 +203,16 @@ export default function ProductList() {
                           <td>{product.rating}</td>
                           <td>
                             <div className="icon-button">
-                              <IconButton
-                                aria-label="Edit Product"
-                                variant="unstyled"
-                                icon={<EditIcon />}
-                              />
+                              <Link to="/update-product">
+                                <IconButton
+                                  aria-label="Edit Product"
+                                  variant="unstyled"
+                                  icon={<EditIcon />}
+                                  onClick={() =>
+                                    handleNavigateUpdate(product.id)
+                                  }
+                                />
+                              </Link>
                               <IconButton
                                 aria-label="Delete Product"
                                 variant="unstyled"
