@@ -10,6 +10,7 @@ const Button = ({
   width,
   fontSize,
   fontWeight,
+  marginTop,
 }) => {
   return (
     <button
@@ -22,6 +23,7 @@ const Button = ({
         width,
         fontSize,
         fontWeight,
+        marginTop,
       }}
     >
       {children}

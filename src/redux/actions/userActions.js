@@ -15,6 +15,15 @@ const fetchUserFail = (error) => ({
   payload: error,
 });
 
+const setUser = (user) => ({
+  type: types.GET_USER_BY_ID,
+  payload: user,
+});
+
+const deleteUser = () => ({
+  type: types.DELETE_USER,
+});
+
 const createUserFail = (error) => ({
   type: types.CREATE_USER_FAIL,
   payload: error,
@@ -25,6 +34,16 @@ const createUserSuccess = (users) => ({
   payload: users,
 });
 
+const updateUserFail = (error) => ({
+  type: types.UPDATE_USER_FAIL,
+  payload: error,
+});
+
+const updateUserSuccess = (user) => ({
+  type: types.UPDATE_USER_SUCCESS,
+  payload: user,
+});
+
 export const setCurrentPage = (page) => ({
   type: types.SET_CURRENT_PAGE,
   payload: page,
@@ -32,7 +51,7 @@ export const setCurrentPage = (page) => ({
 
 export function fetchUsers({ page = 1, size = 10 }) {
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user.tokens.access.token);
+
   return function (dispatch) {
     dispatch(fetchUserStart());
     axios
@@ -81,6 +100,70 @@ export function createUser({ username, email, password, role }) {
       })
       .catch((error) => {
         dispatch(createUserFail(error.message));
+      });
+  };
+}
+
+export function getUserById(userId) {
+  const user = JSON.parse(localStorage.getItem("user"));
+  return function (dispatch) {
+    axios
+      .get(`http://139.59.103.50:5000/v1/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${user.tokens.access.token}`,
+        },
+      })
+      .then((response) => {
+        const { data } = response.data || {};
+        dispatch(setUser(data));
+      });
+  };
+}
+
+export function deleteUserByID(userId) {
+  const user = JSON.parse(localStorage.getItem("user"));
+  return function (dispatch) {
+    axios
+      .delete(`http://139.59.103.50:5000/v1/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${user.tokens.access.token}`,
+        },
+      })
+      .then((response) => {
+        dispatch(deleteUser());
+      });
+  };
+}
+
+export function updateUserById({ username, email, password, role, userId }) {
+  var userr = {
+    username,
+    email,
+    password,
+    role,
+  };
+  const keys = Object.keys(userr);
+  keys.forEach((key) => {
+    if (!userr[key]) {
+      delete userr[key];
+    }
+  });
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  return function (dispatch) {
+    axios
+      .patch(`http://139.59.103.50:5000/v1/users/${userId}`, userr, {
+        headers: {
+          Authorization: `Bearer ${user.tokens.access.token}`,
+        },
+      })
+      .then((response) => {
+        const { data } = response.data || {};
+        console.log(data);
+        dispatch(updateUserSuccess(data.user));
+      })
+      .catch((error) => {
+        dispatch(updateUserFail(error.message));
       });
   };
 }

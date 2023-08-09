@@ -9,17 +9,21 @@ import {
   Tbody,
   Th,
   Thead,
-  Tr,
+  Tr
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import sort from "../assets/sort.png";
 import AppBar from "../components/AppBar";
 import Button from "../components/CustomButton";
 import Input from "../components/CustomInputText";
 import Pagination from "../components/CustomPagination";
 import SideBar from "../components/SideBar";
-import { fetchUsers, setCurrentPage } from "../redux/actions/userActions";
+import {
+  deleteUserByID, fetchUsers,
+  setCurrentPage
+} from "../redux/actions/userActions";
 import "../styles/productList.scss";
 
 let PAGE_SIZE = 5;
@@ -32,6 +36,9 @@ export default function UserList() {
 
   const handleChangePage = (page) => {
     dispatch(setCurrentPage(page));
+  };
+  const handleDelete = (userId) => {
+    dispatch(deleteUserByID(userId));
   };
 
   useEffect(() => {
@@ -137,7 +144,9 @@ export default function UserList() {
                                 alt=""
                               />
                               <div className="info">
-                                <h1>{user.username}</h1>
+                                <Link to={`/user-detail?userId=${user.id}`}>
+                                  <h1>{user.username}</h1>
+                                </Link>
                                 <h2>{user.email}</h2>
                               </div>
                             </div>
@@ -154,15 +163,18 @@ export default function UserList() {
                           </td>
                           <td>
                             <div className="icon-button">
+                              <Link to={`/update-user?userId=${user.id}`}>
+                                <IconButton
+                                  aria-label="Edit User"
+                                  variant="unstyled"
+                                  icon={<EditIcon />}
+                                />
+                              </Link>
                               <IconButton
-                                aria-label="Edit Product"
-                                variant="unstyled"
-                                icon={<EditIcon />}
-                              />
-                              <IconButton
-                                aria-label="Delete Product"
+                                aria-label="Delete User"
                                 variant="unstyled"
                                 icon={<DeleteIcon />}
+                                onClick={() => handleDelete(user.id)}
                               />
                             </div>
                           </td>

@@ -1,0 +1,144 @@
+.order-detail {
+    display: flex;
+
+    .right-screen {
+        display: flex;
+        flex-direction: column;
+
+        .below-appbar {
+            padding: 35px;
+            background-color: #F8F8FF;
+            height: 944px;
+
+            .chakra-breadcrumb.css-14go5ty {
+                color: #929395;
+                font-size: 18px;
+                font-weight: 400;
+            }
+
+                .id {
+                    display: flex;
+                    flex-direction: column;
+                    h1 {
+                        font-size: 35px;
+                        font-weight: 600;
+                        color: #000000;
+                    }
+
+                    h2{ 
+                        font-size: 16px;
+                        font-weight: 500;
+                        color: #929395;
+                        margin-bottom: 15px;
+                    }
+                }
+        
+
+            .content {
+                background-color: #FFFFFF;
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
+
+                .top-content {
+                    display: flex;
+                    justify-content: space-between;
+                    border-bottom: 1px solid #929395;
+                    height: 120px;
+                    padding: 20px;
+
+                    .at {
+                        display: flex;
+                        flex-direction: column;
+
+                        h2 {
+                            font-size: 16px;
+                            color: #929395;
+                            font-family: 500;
+                        }
+
+                        .date {
+                            display: flex;
+                            align-items: center;
+                            margin-bottom: 5px;
+
+                            h1 {
+                                font-size: 15px;
+                                font-weight: 400;
+                            }
+                        }
+                    }
+
+                    .update-order {
+                        display: flex;
+                        gap: 30px;
+
+                        .select {
+                            h2 {
+                                font-size: 18px;
+                                font-weight: 500;
+                            }
+
+                            .select-status {
+                                margin-top: 10px;
+                                width: 190px;
+
+                                .css-13cymwt-control {
+                                    border-radius: 2px;
+                                    border: 1px solid #929395;
+
+                                    .css-qbdosj-Input {
+                                        input {
+                                            grid-area: auto;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .select-paid {
+                                margin-top: 10px;
+                                width: 100px;
+
+                                .css-13cymwt-control {
+                                    border-radius: 2px;
+                                    border: 1px solid #929395;
+                                    .css-qbdosj-Input {
+                                        input {
+                                            grid-area: auto;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .mid-content {
+                    display: flex;
+                    padding: 40px;
+                    justify-content: space-between;
+
+                    .info {
+                        display: flex;
+
+                        .text-info {
+                            margin-left: 15px;
+
+                            h1 {
+                                font-size: 20px;
+                                font-weight: 600;
+                                margin-bottom: 5px;
+                            }
+    
+                            h2 {
+                                font-size: 16px;
+                                font-weight: 400;
+                                color: #3D464D;
+                                margin-bottom: 2px;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}

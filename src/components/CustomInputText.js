@@ -17,6 +17,7 @@ const Input = ({
   backgroundColor,
   borderColor,
   borderStyle,
+  top,
 }) => {
   return (
     <div className="input-wrapper">
@@ -37,6 +38,7 @@ const Input = ({
           width,
           borderColor,
           borderStyle,
+          marginTop: top,
         }}
       />
       {error && <p className="error">Input filed can't be empty!</p>}

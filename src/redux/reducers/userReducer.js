@@ -29,6 +29,42 @@ function userReducer(state = initialState, action) {
         error: action.payload,
       };
 
+    case types.UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        user: action.payload,
+      };
+    case types.UPDATE_USER_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case types.DELETE_USER:
+      return {
+        ...state,
+        ...action.payload,
+      };
+
+    case types.GET_USER_BY_ID:
+      const newUser = action.payload;
+      let newData = state.data.map((user) => {
+        if (user.id === newUser.id) {
+          return newUser;
+        }
+        return user;
+      });
+      if (newData.length === 0) {
+        newData.push(newUser);
+      }
+      return {
+        ...state,
+        loading: false,
+        data: newData,
+      };
+
     case types.SET_CURRENT_PAGE:
       return {
         ...state,

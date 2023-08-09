@@ -10,6 +10,10 @@ import OrderList from "./routes/orderList.jsx";
 import UpdateProduct from "./routes/updateProduct.jsx";
 import CreateProduct from "./routes/createProduct.jsx";
 import CreateUser from "./routes/createUser";
+import UpdateUser from "./routes/updateUser.jsx";
+import UserDetail from "./routes/userDetail.jsx";
+import OrderDetail from "./routes/orderDetail.jsx";
+import ProductDetail from "./routes/productDetail.jsx";
 
 function App() {
   return (
@@ -33,6 +37,14 @@ function App() {
           }
         />
         <Route
+          path="/user-detail"
+          element={
+            <PrivateRoute roles={["admin"]}>
+              <UserDetail />
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="/update-product"
           element={
             <PrivateRoute roles={["admin"]}>
@@ -41,10 +53,26 @@ function App() {
           }
         />
         <Route
+          path="/update-user"
+          element={
+            <PrivateRoute roles={["admin"]}>
+              <UpdateUser />
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="/create-product"
           element={
             <PrivateRoute roles={["admin"]}>
               <CreateProduct />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/order-detail"
+          element={
+            <PrivateRoute roles={["admin"]}>
+              <OrderDetail />
             </PrivateRoute>
           }
         />
@@ -65,6 +93,7 @@ function App() {
           }
         />
         <Route path="/login" element={<Login />} />
+         <Route path="/product-detail" element={<ProductDetail />} />
         <Route path="/register" element={<Register />} />
       </Routes>
     </ChakraProvider>

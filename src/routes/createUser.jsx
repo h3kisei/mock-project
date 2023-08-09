@@ -1,37 +1,22 @@
-import { DeleteIcon, EditIcon, SearchIcon } from "@chakra-ui/icons";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  IconButton,
-  Table,
-  TableContainer,
-  Tbody,
-  Th,
-  Thead,
-  Tr,
-} from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import sort from "../assets/sort.png";
+import upload from "../assets/upload.png";
 import AppBar from "../components/AppBar";
 import Button from "../components/CustomButton";
-import Pagination from "../components/CustomPagination";
+import Input from "../components/CustomInputText";
+import SelectRole from "../components/SelectRole";
 import SideBar from "../components/SideBar";
 import { createUser } from "../redux/actions/userActions";
 import "../styles/createUser.scss";
-import Input from "../components/CustomInputText";
-import NumberInputStock from "../components/NumberInputStock";
-import NumberInputPrice from "../components/NumberInputPrice";
-import upload from "../assets/upload.png";
-import SelectRole from "../components/SelectRole";
-import CategoriesSelect from "../components/SelectCategory";
+import { Radio, RadioGroup, Stack } from "@chakra-ui/react";
 
 export default function UpdateProduct() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [nameValue, setNameValue] = useState("");
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
+  const [value, setValue] = React.useState("1");
   const { users } = useSelector((state) => ({
     ...state.users,
   }));
@@ -57,9 +42,9 @@ export default function UpdateProduct() {
   };
 
   return (
-    <div className="updateProduct">
+    <div className="update-product">
       <SideBar />
-      <div className="rightScreen">
+      <div className="right-screen">
         <AppBar />
         <div className="below-appbar">
           <Breadcrumb fontWeight="medium" fontSize="sm">
@@ -81,8 +66,8 @@ export default function UpdateProduct() {
               height="40px"
               onClick={handleCreate}
               radius="5px"
-              width="150px"
-              children="Add product"
+              width="110px"
+              children="Add User"
               fontSize="20px"
               fontWeight="600"
             />
@@ -152,7 +137,7 @@ export default function UpdateProduct() {
                   />
                 </div>
                 <div className="input">
-                  <h2>Retype password</h2>
+                  <h2>Role</h2>
                   <div className="select-role">
                     <SelectRole onRole={handleRole} value={role} />
                   </div>
@@ -191,6 +176,53 @@ export default function UpdateProduct() {
                       setSelectedImage(event.target.files[0]);
                     }}
                   />
+                </div>
+              </div>
+              <div className="another-info">
+                <div className="top-another">
+                  <h1>Another Info</h1>
+                </div>
+                <div className="bot-another">
+                  <div className="input">
+                    <h2>Contact</h2>
+                    <Input
+                      type="text"
+                      name="contact"
+                      border="1px"
+                      borderColor="#929395"
+                      borderStyle="solid"
+                      radius="2px"
+                      width="385px"
+                      height="40px"
+                    />
+                  </div>
+                  <div className="radio">
+                    <h1>Status</h1>
+                    <RadioGroup onChange={setValue} value={value}>
+                      <Stack direction="row">
+                        <Radio value="1">Active</Radio>
+                        <Radio value="2">Disable</Radio>
+                      </Stack>
+                    </RadioGroup>
+                  </div>
+                  <div className="radio">
+                    <h1>Verify Email</h1>
+                    <RadioGroup onChange={setValue} value={value}>
+                      <Stack direction="row">
+                        <Radio value="1">Yes</Radio>
+                        <Radio value="2">No</Radio>
+                      </Stack>
+                    </RadioGroup>
+                  </div>
+                  <div className="radio">
+                    <h1>Verify Contact</h1>
+                    <RadioGroup onChange={setValue} value={value}>
+                      <Stack direction="row">
+                        <Radio value="1">Yes</Radio>
+                        <Radio value="2">No</Radio>
+                      </Stack>
+                    </RadioGroup>
+                  </div>
                 </div>
               </div>
             </div>

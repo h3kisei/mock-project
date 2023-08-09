@@ -9,6 +9,7 @@ const rootReducer = combineReducers({
   product: productReducer,
   user: authReducer,
   users: userReducer,
+  user: userReducer,
   orders: orderReducer,
 });
 

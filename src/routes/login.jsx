@@ -5,8 +5,21 @@ import { useDispatch } from "react-redux";
 import "../styles/login.scss";
 import { login } from "../redux/actions/authActions";
 import React, { useEffect } from "react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  IconButton,
+} from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 
-const Login = (onClose) => {
+const Login = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const initialValues = {
     email: "",
     password: "",
@@ -22,30 +35,47 @@ const Login = (onClose) => {
   const dispatch = useDispatch();
   const onSubmit = (values) => {
     dispatch(login({ ...values, deviceId: "deviceId-hieu1x@gmail.com" }));
-    onClose();
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={onSubmit}
-      validationSchema={validationSchema}
-    >
-      {(formik) => {
-        return (
-          <Form>
-            <div style={{ padding: 20 }}>
-              <FormikField label="Email" name="email" type="email" />
-              <FormikField label="Password" name="password" type="password" />
-              <button style={{ display: "block" }}>submit</button>
-            </div>
-            <div className="pre">
-              <pre>{JSON.stringify(formik, null, 4)}</pre>
-            </div>
-          </Form>
-        );
-      }}
-    </Formik>
+    <>
+      <Button onClick={onOpen}>Open Modal</Button>
+      <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Create your account</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <Formik
+              initialValues={initialValues}
+              onSubmit={onSubmit}
+              validationSchema={validationSchema}
+            >
+              {(formik) => {
+                return (
+                  <Form>
+                    <div style={{ padding: 20 }}>
+                      <FormikField label="Email" name="email" type="email" />
+                      <FormikField
+                        label="Password"
+                        name="password"
+                        type="password"
+                      />
+                      <button style={{ display: "block" }} onClick={onClose}>
+                        submit
+                      </button>
+                    </div>
+                    <div className="pre">
+                      <pre>{JSON.stringify(formik, null, 4)}</pre>
+                    </div>
+                  </Form>
+                );
+              }}
+            </Formik>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
 export default Login;

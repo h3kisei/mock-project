@@ -7,7 +7,6 @@ const initialState = {
   loading: false,
   error: null,
   keyword: "",
-  product: [],
   image: [],
 };
 
@@ -26,11 +25,22 @@ function productReducer(state = initialState, action) {
       };
 
     case types.GET_PRODUCT_BY_ID:
+      const newProduct = action.payload;
+      let newData = state.data.map((product) => {
+        if (product.id === newProduct.id) {
+          return newProduct;
+        }
+        return product;
+      });
+      if (newData.length === 0) {
+        newData.push(newProduct);
+      }
       return {
         ...state,
         loading: false,
-        ...action.payload,
+        data: newData,
       };
+      
     case types.FETCH_PRODUCT_FAIL:
       return {
         ...state,
@@ -44,7 +54,21 @@ function productReducer(state = initialState, action) {
         loading: false,
         product: action.payload,
       };
+      
     case types.CREATE_PRODUCT_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case types.UPDATE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        product: action.payload,
+      };
+    case types.UPDATE_PRODUCT_FAIL:
       return {
         ...state,
         loading: false,

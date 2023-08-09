@@ -15,11 +15,8 @@ import {
   Button,
   IconButton,
 } from "@chakra-ui/react";
-import { useDisclosure } from "@chakra-ui/react";
-import Login from "../routes/login";
 
 const MainBar = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
       <TopBar />
@@ -38,21 +35,10 @@ const MainBar = () => {
         <img src={cart} alt="" />
         <div>
           <IconButton
-            onClick={onOpen}
             aria-label="User"
             variant="unstyled"
             icon={<img src={user} alt="" />}
           />
-          <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-            <ModalContent>
-              <ModalHeader>Create your account</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody pb={6}>
-                <Login onClose={onClose} />
-              </ModalBody>
-            </ModalContent>
-          </Modal>
         </div>
       </div>
     </>

@@ -6,65 +6,47 @@ import upload from "../assets/upload.png";
 import AppBar from "../components/AppBar";
 import Button from "../components/CustomButton";
 import Input from "../components/CustomInputText";
-import NumberInputPrice from "../components/NumberInputPrice";
-import NumberInputStock from "../components/NumberInputStock";
-import SelectCategory from "../components/SelectCategory";
-import SelectRating from "../components/SelectRating";
+import SelectRole from "../components/SelectRole";
 import SideBar from "../components/SideBar";
-import {
-  getProductById,
-  updateProductById,
-} from "../redux/actions/productActions";
-import "../styles/updateProduct.scss";
+import { getUserById, updateUserById } from "../redux/actions/userActions";
+import "../styles/createUser.scss";
 
-export default function UpdateProduct() {
+export default function UpdateUser() {
   const { search } = useLocation();
-  const regexProductId = /productId=\d*/;
-  const productId = regexProductId.exec(search)[0].replace("productId=", "");
+  const regexUserId = /userId=\d*/;
+  const userId = regexUserId.exec(search)[0].replace("userId=", "");
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [nameValue, setNameValue] = useState("");
-  const [descriptionValue, setDescriptionValue] = useState("");
-  const [stockValue, setStockValue] = useState("");
-  const [priceValue, setPriceValue] = useState();
-  const [brandValue, setBrandValue] = useState("");
-  const { data, loading } = useSelector((state) => state.products);
+  const [emailValue, setEmailValue] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
+  const { data, loading } = useSelector((state) => state.users);
 
-  const selectedProduct = data.find(
-    (product) => product.id === Number(productId)
-  );
+  const selectedUser = data.find((user) => user.id === Number(userId));
 
-  const [selected, setSelected] = useState();
+  const [role, setRole] = useState();
 
-  const handleSelect = (value) => {
-    setSelected(value);
-  };
-
-  const handlePrice = (value) => {
-    setPriceValue(value);
-  };
-
-  const handleStock = (value) => {
-    setStockValue(value);
+  const handleRole = (value) => {
+    setRole(value);
   };
 
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(getProductById(productId));
-  }, [dispatch, productId]);
+    dispatch(getUserById(userId));
+  }, [dispatch, userId]);
 
   const handleUpdate = () => {
     dispatch(
-      updateProductById({
-        productId,
-        name: nameValue,
-        description: descriptionValue,
-        countInStock: stockValue,
-        brand: brandValue,
-        price: priceValue,
-        category: selected.label,
+      updateUserById({
+        userId,
+        username: nameValue,
+        email: emailValue,
+        password: passwordValue,
+        role: role.label,
       })
     );
+    console.log(role);
   };
 
   return (
@@ -72,113 +54,112 @@ export default function UpdateProduct() {
       <SideBar />
       <div className="right-screen">
         <AppBar />
-        {!loading && selectedProduct && (
-          <div className="below-appbar" key={selectedProduct.id}>
+        {!loading && selectedUser && (
+          <div className="below-appbar" key={selectedUser.id}>
             <Breadcrumb fontWeight="medium" fontSize="sm">
               <BreadcrumbItem>
-                <BreadcrumbLink href="/">Dashboard</BreadcrumbLink>
+                <BreadcrumbLink href="/product">Dashboard</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbItem>
-                <BreadcrumbLink href="/product-list">Product</BreadcrumbLink>
+                <BreadcrumbLink href="/user-list">User</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbItem isCurrentPage>
-                <BreadcrumbLink href="/update-product">
-                  Update Product
-                </BreadcrumbLink>
+                <BreadcrumbLink href="/create-user">Update User</BreadcrumbLink>
               </BreadcrumbItem>
             </Breadcrumb>
             <div className="update-product-bar">
               <div className="id">
-                <h1>Update Product #{selectedProduct.id}</h1>
-                <h2>Product ID: {selectedProduct.id}</h2>
+                <h1>Update User #{selectedUser.id}</h1>
+                <h2>User ID: {selectedUser.id}</h2>
               </div>
               <Button
                 border="none"
                 color="#FFD333"
                 height="40px"
+                onClick={handleUpdate}
                 radius="5px"
                 width="60px"
                 children="Save"
                 fontSize="20px"
                 fontWeight="600"
-                onClick={handleUpdate}
               />
             </div>
             <div className="content">
               <div className="left-content">
                 <div className="top-left">
-                  <h1>Basic information</h1>
+                  <h1>User information</h1>
                 </div>
                 <div className="bot-left">
                   <div className="input">
                     <h2>Name</h2>
                     <Input
                       type="text"
-                      name="search"
+                      name="name"
                       border="1px"
                       borderColor="#929395"
                       borderStyle="solid"
                       radius="2px"
                       width="620px"
                       height="40px"
-                      placeholder={selectedProduct.name}
+                      placeholder={selectedUser.username}
                       value={nameValue}
                       onChange={(e) => setNameValue(e.target.value)}
                     />
                   </div>
                   <div className="input">
-                    <h2>Description</h2>
+                    <h2>Email</h2>
                     <Input
-                      type="text"
-                      name="search"
-                      border="1px"
-                      borderColor="#929395"
-                      borderStyle="solid"
-                      radius="2px"
-                      width="620px"
-                      height="110px"
-                      placeholder={selectedProduct.description}
-                      value={descriptionValue}
-                      onChange={(e) => setDescriptionValue(e.target.value)}
-                    />
-                  </div>
-                  <div className="number-input">
-                    <div className="input">
-                      <h2>Price</h2>
-                      <NumberInputPrice
-                        defaultValue={selectedProduct.price}
-                        onPrice={handlePrice}
-                        value={priceValue}
-                      />
-                    </div>
-                    <div className="input">
-                      <h2>Discount Percent</h2>
-                      <NumberInputPrice />
-                    </div>
-                  </div>
-                  <div className="input">
-                    <h2>Brand</h2>
-                    <Input
-                      type="text"
-                      name="search"
+                      type="email"
+                      name="email"
                       border="1px"
                       borderColor="#929395"
                       borderStyle="solid"
                       radius="2px"
                       width="620px"
                       height="40px"
-                      placeholder={selectedProduct.brand}
-                      value={brandValue}
-                      onChange={(e) => setBrandValue(e.target.value)}
+                      placeholder={selectedUser.email}
+                      value={emailValue}
+                      onChange={(e) => setEmailValue(e.target.value)}
                     />
                   </div>
                   <div className="input">
-                    <h2>Stock Quantity</h2>
-                    <NumberInputStock
-                      defaultValue={selectedProduct.countInStock}
-                      onStock={handleStock}
-                      value={stockValue}
+                    <h2>Password</h2>
+                    <Input
+                      type="password"
+                      name="password"
+                      border="1px"
+                      borderColor="#929395"
+                      borderStyle="solid"
+                      radius="2px"
+                      width="620px"
+                      height="40px"
+                      placeholder="********"
+                      value={passwordValue}
+                      onChange={(e) => setPasswordValue(e.target.value)}
                     />
+                  </div>
+                  <div className="input">
+                    <h2>Retype password</h2>
+                    <Input
+                      type="password"
+                      name="retype password"
+                      border="1px"
+                      borderColor="#929395"
+                      borderStyle="solid"
+                      radius="2px"
+                      width="620px"
+                      height="40px"
+                    />
+                  </div>
+                  <div className="input">
+                    <h2>Role</h2>
+                    <div className="select-role">
+                      <SelectRole
+                        defaultValue={selectedUser.role}
+                        onRole={handleRole}
+                        value={role}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -214,22 +195,6 @@ export default function UpdateProduct() {
                         setSelectedImage(event.target.files[0]);
                       }}
                     />
-                  </div>
-                </div>
-                <div className="categories">
-                  <div className="top-categories">
-                    <h1>Categories</h1>
-                  </div>
-                  <div className="bot-categories">
-                    <SelectCategory onSelect={handleSelect} value={selected} />
-                  </div>
-                </div>
-                <div className="rating">
-                  <div className="top-rating">
-                    <h1>Rating</h1>
-                  </div>
-                  <div className="bot-rating">
-                    <SelectRating />
                   </div>
                 </div>
               </div>

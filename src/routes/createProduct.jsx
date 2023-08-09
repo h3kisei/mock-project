@@ -1,31 +1,17 @@
-import { DeleteIcon, EditIcon, SearchIcon } from "@chakra-ui/icons";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  IconButton,
-  Table,
-  TableContainer,
-  Tbody,
-  Th,
-  Thead,
-  Tr,
-} from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import sort from "../assets/sort.png";
+import upload from "../assets/upload.png";
 import AppBar from "../components/AppBar";
 import Button from "../components/CustomButton";
-import Pagination from "../components/CustomPagination";
+import Input from "../components/CustomInputText";
+import NumberInputPrice from "../components/NumberInputPrice";
+import NumberInputStock from "../components/NumberInputStock";
+import SelectCategory from "../components/SelectCategory";
+import SelectRating from "../components/SelectRating";
 import SideBar from "../components/SideBar";
 import { createProduct, uploadImages } from "../redux/actions/productActions";
 import "../styles/updateProduct.scss";
-import Input from "../components/CustomInputText";
-import NumberInputStock from "../components/NumberInputStock";
-import NumberInputPrice from "../components/NumberInputPrice";
-import upload from "../assets/upload.png";
-import SelectRating from "../components/SelectRating";
-import SelectCategory from "../components/SelectCategory";
 
 export default function UpdateProduct() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -75,9 +61,9 @@ export default function UpdateProduct() {
   };
 
   return (
-    <div className="updateProduct">
+    <div className="update-product">
       <SideBar />
-      <div className="rightScreen">
+      <div className="right-screen">
         <AppBar />
         <div className="below-appbar">
           <Breadcrumb fontWeight="medium" fontSize="sm">

@@ -33,10 +33,14 @@ const SideBar = () => {
           <img src={arrow} alt="" />
         </div>
         <div className="side-bar-element-drop">
-          <h2>Product List</h2>
+          <Link to="/product-list">
+            <h2>Product List</h2>
+          </Link>
         </div>
         <div className="side-bar-element-drop">
-          <h2>Add Product</h2>
+          <Link to="/create-product">
+            <h2>Add Product</h2>
+          </Link>
         </div>
         <div className="side-bar-element">
           <div className="left">
@@ -51,12 +55,16 @@ const SideBar = () => {
           </Link>
         </div>
         <div className="side-bar-element-drop">
-          <h2>Add User</h2>
+          <Link to="/create-user">
+            <h2>Add User</h2>
+          </Link>
         </div>
-        <div className="dashboard">
-          <img src={orders} alt="" />
-          <h2>Orders</h2>
-        </div>
+        <Link to="/order-list">
+          <div className="dashboard">
+            <img src={orders} alt="" />
+            <h2>Orders</h2>
+          </div>
+        </Link>
         <div className="side-bar-element">
           <div className="left">
             <img src={settings} alt="" />

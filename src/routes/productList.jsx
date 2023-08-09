@@ -13,22 +13,22 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import sort from "../assets/sort.png";
 import AppBar from "../components/AppBar";
 import Button from "../components/CustomButton";
+import Input from "../components/CustomInputText";
 import Pagination from "../components/CustomPagination";
 import SideBar from "../components/SideBar";
 import {
+  deleteProductByID,
   fetchProducts,
   searchListProducts,
   setCurrentPage,
   setKeyword,
-  deleteProductByID,
-  getProductById,
 } from "../redux/actions/productActions";
 import "../styles/productList.scss";
-import Input from "../components/CustomInputText";
-import { Link } from "react-router-dom";
+import Rating from "../components/Rating";
 
 let PAGE_SIZE = 5;
 
@@ -50,11 +50,6 @@ export default function ProductList() {
 
   const handleDelete = (productId) => {
     dispatch(deleteProductByID(productId));
-  };
-
-  const handleNavigateUpdate = (productId) => {
-    dispatch(getProductById(productId));
-    console.log(productId);
   };
 
   useEffect(() => {
@@ -178,7 +173,7 @@ export default function ProductList() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {!loading ? (
+                  {!loading && (
                     data.map((product) => {
                       return (
                         <tr className="tr" key={product.id}>
@@ -200,17 +195,19 @@ export default function ProductList() {
                           <td>{product.category}</td>
                           <td>{product.countInStock} items</td>
                           <td>{product.price}</td>
-                          <td>{product.rating}</td>
+                          <td>
+                            {" "}
+                            <Rating count={5} value={product.rating} />
+                          </td>
                           <td>
                             <div className="icon-button">
-                              <Link to="/update-product">
+                              <Link
+                                to={`/update-product?productId=${product.id}`}
+                              >
                                 <IconButton
                                   aria-label="Edit Product"
                                   variant="unstyled"
                                   icon={<EditIcon />}
-                                  onClick={() =>
-                                    handleNavigateUpdate(product.id)
-                                  }
                                 />
                               </Link>
                               <IconButton
@@ -224,8 +221,6 @@ export default function ProductList() {
                         </tr>
                       );
                     })
-                  ) : (
-                    <tr />
                   )}
                 </Tbody>
               </Table>

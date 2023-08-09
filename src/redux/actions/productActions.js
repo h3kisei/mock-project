@@ -20,14 +20,24 @@ const createProductSuccess = (product) => ({
   payload: product,
 });
 
-const fetchProductFail = (error) => ({
-  type: types.FETCH_PRODUCT_FAIL,
+const updateProductFail = (error) => ({
+  type: types.UPDATE_PRODUCT_FAIL,
   payload: error,
 });
 
-const getProduct = (product) => ({
+const updateProductSuccess = (product) => ({
+  type: types.UPDATE_PRODUCT_SUCCESS,
+  payload: product,
+});
+
+const setProduct = (product) => ({
   type: types.GET_PRODUCT_BY_ID,
   payload: product,
+});
+
+const fetchProductFail = (error) => ({
+  type: types.FETCH_PRODUCT_FAIL,
+  payload: error,
 });
 
 const uploadImage = (image) => ({
@@ -143,12 +153,67 @@ export function getProductById(productId) {
       })
       .then((response) => {
         const { data } = response.data || {};
+        dispatch(setProduct(data.product));
         console.log(data);
-        const product = {
-          data: data.product.product,
-          productId: data.product.product.id,
-        };
-        dispatch(getProduct(product));
+      });
+  };
+}
+
+export function getProductWithReviews(productId) {
+  const user = JSON.parse(localStorage.getItem("user"));
+  return function (dispatch) {
+    axios
+      .get(`http://139.59.103.50:5000/v1/products/${productId}`, {
+        headers: {
+          Authorization: `Bearer ${user.tokens.access.token}`,
+        },
+      })
+      .then((response) => {
+        const { data } = response.data || {};
+        dispatch(setProduct(data));
+      });
+  };
+}
+
+export function updateProductById({
+  name,
+  description,
+  countInStock,
+  brand,
+  price,
+  category,
+  productId,
+}) {
+  var product = {
+    name,
+    description,
+    countInStock,
+    brand,
+    price,
+    category,
+  };
+  const keys = Object.keys(product);
+  keys.forEach((key) => {
+    if (!product[key]) {
+      delete product[key];
+    }
+  });
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  return function (dispatch) {
+    console.log(product);
+    axios
+      .patch(`http://139.59.103.50:5000/v1/products/${productId}`, product, {
+        headers: {
+          Authorization: `Bearer ${user.tokens.access.token}`,
+        },
+      })
+      .then((response) => {
+        const { data } = response.data || {};
+        dispatch(updateProductSuccess(data.product));
+      })
+      .catch((error) => {
+        dispatch(updateProductFail(error.message));
       });
   };
 }
@@ -179,26 +244,6 @@ export function fetchProducts({ page = 1, size = 10 }) {
     dispatch(fetchProductStart());
     axios
       .get(`http://139.59.103.50:5000/v1/products?page=${page}&size=${size}`)
-      .then((response) => {
-        const { data } = response.data || {};
-        const products = {
-          data: data.result,
-          total: data.total,
-          currentPage: data.currentPage,
-        };
-        dispatch(fetchProductSuccess(products));
-      })
-      .catch((error) => {
-        dispatch(fetchProductFail(error.message));
-      });
-  };
-}
-
-export function fetchProductById(id) {
-  return function (dispatch) {
-    dispatch(fetchProductStart());
-    axios
-      .get(`http://139.59.103.50:5000/v1/products?id={id}`)
       .then((response) => {
         const { data } = response.data || {};
         const products = {

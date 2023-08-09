@@ -36,6 +36,42 @@ function orderReducer(state = initialState, action) {
         currentPage: action.payload,
       };
 
+    case types.UPDATE_ORDER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        order: action.payload,
+      };
+    case types.UPDATE_ORDER_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case types.DELETE_ORDER:
+      return {
+        ...state,
+        ...action.payload,
+      };
+
+    case types.GET_ORDER_BY_ID:
+      const newOrder = action.payload;
+      let newData = state.data.map((order) => {
+        if (order.id === newOrder.id) {
+          return newOrder;
+        }
+        return order;
+      });
+      if (newData.length === 0) {
+        newData.push(newOrder);
+      }
+      return {
+        ...state,
+        loading: false,
+        data: newData,
+      };
+
     default:
       return state;
   }

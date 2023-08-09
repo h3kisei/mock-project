@@ -1,0 +1,156 @@
+.user-detail {
+    display: flex;
+
+    .right-screen {
+        display: flex;
+        flex-direction: column;
+
+        .below-appbar {
+            padding: 35px;
+            background-color: #F8F8FF;
+            height: 944px;
+
+            .chakra-breadcrumb.css-14go5ty {
+                color: #929395;
+                font-size: 18px;
+                font-weight: 400;
+            }
+
+            .title {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 20px;
+
+                .id {
+                    display: flex;
+                    flex-direction: column;
+                    h1 {
+                        font-size: 35px;
+                        font-weight: 600;
+                        color: #000000;
+                    }
+
+                    h2{ 
+                        font-size: 16px;
+                        font-weight: 500;
+                        color: #929395;
+                    }
+                }
+        
+            }
+            
+            .content {
+                width: 1140px;
+                height: 750px;
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
+                background-color: #FFFFFF;
+                padding: 0px 25px;
+                display: flex;
+                flex-direction: column;
+                position: relative;
+
+                .top-content {
+                    border-bottom: 1px solid #929395;
+                    height: 440px;
+
+                    .info {
+                        position: absolute;
+                        top: 30%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+
+                        .image {
+                            border-radius: 50%;
+                            margin-bottom: 15px;
+                        }
+
+                        h1 {
+                            font-size: 35px;
+                            font-weight: 600;
+                        }
+
+                        h2 {
+                            font-size: 25px;
+                            font-weight: 400;
+                            color: #2234D2;
+                        }
+
+                        h3 {
+                            font-size: 25px;
+                            font-weight: 400;
+                        }
+                    }
+
+                }
+
+                br {
+                    color:#929395;
+                }
+
+                .bot-content {
+                    display: flex;
+                    flex-direction: column;
+                    position: absolute;
+                    top: 78%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+
+                    .role {
+                        display: flex;
+                        width: 300px;
+                        justify-content: space-between;
+                        margin-bottom: 20px;
+
+                        h4 {
+                            font-size: 25px;
+                            font-weight: 500;
+                        }
+
+                        .css-1eveppl {
+                            background-color: #4B9528;
+                            border-radius: 50px;
+                            width: 120px;
+                            height: 40px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 25px;
+                            font-weight: 500;
+                            color: #FFFFFF;
+                        }
+                    }
+
+                    .verify {
+                        display: flex;
+                        width: 260px;
+                        justify-content: space-between;
+                        margin-bottom: 20px;
+
+                        h4 {
+                            font-size: 25px;
+                            font-weight: 500;
+                        }
+
+                        .css-1eveppl {
+                            background-color: #4B9528;
+                            border-radius: 50%;
+                            width: 35px;
+                            height: 35px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 25px;
+                            font-weight: 500;
+                            color: #FFFFFF;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

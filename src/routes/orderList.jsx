@@ -6,24 +6,28 @@ import {
   IconButton,
   Table,
   TableContainer,
+  Tag,
   Tbody,
   Th,
   Thead,
   Tr,
-  Tag,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import sort from "../assets/sort.png";
 import AppBar from "../components/AppBar";
-import Button from "../components/CustomButton";
 import Input from "../components/CustomInputText";
 import Pagination from "../components/CustomPagination";
 import SideBar from "../components/SideBar";
-import { fetchOrders, setCurrentPage } from "../redux/actions/orderActions";
+import {
+  fetchOrders,
+  setCurrentPage,
+  deleteOrderByID,
+} from "../redux/actions/orderActions";
 import "../styles/productList.scss";
+import { Link } from "react-router-dom";
 
-let PAGE_SIZE = 1;
+let PAGE_SIZE = 5;
 
 export default function UserList() {
   const { data, loading, total, currentPage } = useSelector((state) => ({
@@ -33,6 +37,10 @@ export default function UserList() {
 
   const handleChangePage = (page) => {
     dispatch(setCurrentPage(page));
+  };
+
+  const handleDelete = (orderId) => {
+    dispatch(deleteOrderByID(orderId));
   };
 
   useEffect(() => {
@@ -126,16 +134,16 @@ export default function UserList() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {!loading ? (
+                  {!loading &&
                     data.map((order) => {
                       return (
                         <tr key={order.id}>
                           <td>{order.id}</td>
-                          <td>{order.userID}</td>
+                          <td>{order.userId}</td>
                           <td>{order.totalPrice}</td>
                           <td>{order.address}</td>
                           <td>{order.contact}</td>
-                          <td>{order.date}</td>
+                          <td>{order.createdAt}</td>
                           <td>
                             <Tag
                               colorScheme={
@@ -148,24 +156,24 @@ export default function UserList() {
                           <td>{order.status}</td>
                           <td>
                             <div className="icon-button">
-                              <IconButton
-                                aria-label="Edit Product"
-                                variant="unstyled"
-                                icon={<EditIcon />}
-                              />
+                              <Link to={`/order-detail?orderId=${order.id}`}>
+                                <IconButton
+                                  aria-label="Edit Product"
+                                  variant="unstyled"
+                                  icon={<EditIcon />}
+                                />
+                              </Link>
                               <IconButton
                                 aria-label="Delete Product"
                                 variant="unstyled"
+                                onClick={() => handleDelete(order.id)}
                                 icon={<DeleteIcon />}
                               />
                             </div>
                           </td>
                         </tr>
                       );
-                    })
-                  ) : (
-                    <tr />
-                  )}
+                    })}
                 </Tbody>
               </Table>
             </TableContainer>
