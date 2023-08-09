@@ -32,7 +32,6 @@ import yellow from "../assets/yellow.png";
 import cart from "../assets/addtocart.png";
 import QuantityInput from "../components/QuantityInput";
 import Pagination from "../components/CustomPagination";
-import { ConcatenationScope } from "webpack";
 
 let PageSize = 5;
 
@@ -45,11 +44,11 @@ export default function ProductDetail() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const selectedProduct = data.find(
-    (data) => data.product.id === Number(productId)
+    (product) => product.product.id === Number(productId)
   );
 
-  const review = selectedProduct.reviews;
-  console.log(review);
+  const reviews = selectedProduct?.reviews;
+  console.log(reviews);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -196,16 +195,15 @@ export default function ProductDetail() {
                   <TabPanel>
                     <div>
                       <h1>Customer Reviews</h1>
-                      {!loading &&
-                        data.map((rv) => {
-                          console.log(rv.reviews.result.content);
-                          return <div>{rv.reviews.content}</div>;
+                      {(!loading && reviews?.result?.length) &&
+                        reviews.result.map((review) => {
+                          return <div key={review.content}>{review.content}</div>;
                         })}
 
                       <Pagination
                         className="pagination-bar"
                         currentPage={currentPage}
-                        totalCount={data.length}
+                        totalCount={reviews.total}
                         pageSize={PageSize}
                         onPageChange={(page) => setCurrentPage(page)}
                       />
