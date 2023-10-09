@@ -14,7 +14,9 @@ const SideBar = () => {
   return (
     <div className="side-bar">
       <div className="side-bar-top">
-        <h1>SHOP APP</h1>
+        <Link to="/">
+          <h1>SHOP APP</h1>
+        </Link>
         <Tag>ADMIN</Tag>
       </div>
       <div className="side-bar-bot">

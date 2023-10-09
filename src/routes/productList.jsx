@@ -92,17 +92,19 @@ export default function ProductList() {
           </Breadcrumb>
           <div className="product-bar">
             <h1>Product</h1>
-            <Button
-              border="none"
-              color="#FFD333"
-              height="40px"
-              onClick={() => console.log("New product!")}
-              radius="5px"
-              width="150px"
-              children="New product"
-              fontSize="20px"
-              fontWeight="600"
-            />
+            <Link to="/create-product">
+              <Button
+                border="none"
+                color="#FFD333"
+                height="40px"
+                onClick={() => console.log("New product!")}
+                radius="5px"
+                width="150px"
+                children="New product"
+                fontSize="20px"
+                fontWeight="600"
+              />
+            </Link>
           </div>
           <div className="content">
             <div className="search">
@@ -173,7 +175,7 @@ export default function ProductList() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {!loading && (
+                  {!loading &&
                     data.map((product) => {
                       return (
                         <tr className="tr" key={product.id}>
@@ -200,28 +202,31 @@ export default function ProductList() {
                             <Rating count={5} value={product.rating} />
                           </td>
                           <td>
-                            <div className="icon-button">
-                              <Link
-                                to={`/update-product?productId=${product.id}`}
-                              >
+                            <div className="group-ib">
+                              <div className="icon-button">
+                                <Link
+                                  to={`/update-product?productId=${product.id}`}
+                                >
+                                  <IconButton
+                                    aria-label="Edit Product"
+                                    variant="unstyled"
+                                    icon={<EditIcon />}
+                                  />
+                                </Link>
+                              </div>
+                              <div className="icon-button">
                                 <IconButton
-                                  aria-label="Edit Product"
+                                  aria-label="Delete Product"
                                   variant="unstyled"
-                                  icon={<EditIcon />}
+                                  onClick={() => handleDelete(product.id)}
+                                  icon={<DeleteIcon />}
                                 />
-                              </Link>
-                              <IconButton
-                                aria-label="Delete Product"
-                                variant="unstyled"
-                                onClick={() => handleDelete(product.id)}
-                                icon={<DeleteIcon />}
-                              />
+                              </div>
                             </div>
                           </td>
                         </tr>
                       );
-                    })
-                  )}
+                    })}
                 </Tbody>
               </Table>
             </TableContainer>

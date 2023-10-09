@@ -4,17 +4,8 @@ import menu from "../assets/menu.png";
 import cart from "../assets/Cart-vector.png";
 import user from "../assets/UserItem.png";
 import TopBar from "../components/TopBar";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Button,
-  IconButton,
-} from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { IconButton } from "@chakra-ui/react";
 
 const MainBar = () => {
   return (
@@ -34,11 +25,13 @@ const MainBar = () => {
         </div>
         <img src={cart} alt="" />
         <div>
-          <IconButton
-            aria-label="User"
-            variant="unstyled"
-            icon={<img src={user} alt="" />}
-          />
+          <Link to="/login">
+            <IconButton
+              aria-label="User"
+              variant="outline"
+              icon={<img src={user} alt="" />}
+            />
+          </Link>
         </div>
       </div>
     </>

@@ -1,5 +1,7 @@
 .list-card {
-    display: grid;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
     gap: 10px;
 
     .card {
@@ -16,7 +18,7 @@
             flex-direction: column;
 
             h1 {
-                font-size: 32px;
+                font-size: 26px;
                 font-weight: 700;
             }
             h2 {

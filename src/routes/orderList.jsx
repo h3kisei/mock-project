@@ -155,20 +155,24 @@ export default function UserList() {
                           </td>
                           <td>{order.status}</td>
                           <td>
-                            <div className="icon-button">
-                              <Link to={`/order-detail?orderId=${order.id}`}>
+                            <div className="group-ib">
+                              <div className="icon-button">
+                                <Link to={`/order-detail?orderId=${order.id}`}>
+                                  <IconButton
+                                    aria-label="Edit Product"
+                                    variant="unstyled"
+                                    icon={<EditIcon />}
+                                  />
+                                </Link>
+                              </div>
+                              <div className="icon-button">
                                 <IconButton
-                                  aria-label="Edit Product"
+                                  aria-label="Delete Product"
                                   variant="unstyled"
-                                  icon={<EditIcon />}
+                                  onClick={() => handleDelete(order.id)}
+                                  icon={<DeleteIcon />}
                                 />
-                              </Link>
-                              <IconButton
-                                aria-label="Delete Product"
-                                variant="unstyled"
-                                onClick={() => handleDelete(order.id)}
-                                icon={<DeleteIcon />}
-                              />
+                              </div>
                             </div>
                           </td>
                         </tr>

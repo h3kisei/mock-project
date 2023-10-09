@@ -1,3 +1,17 @@
 .pre {
     display: none;
 }
+
+button {
+    border: 1px solid #000000;
+    border-radius: 4px;
+    margin: 10px 0px;
+    padding: 5px !important;
+    opacity: 0.8;
+}
+
+a {
+    &:hover {
+        opacity: 0.7;
+    }
+}

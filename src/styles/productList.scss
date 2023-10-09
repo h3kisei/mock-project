@@ -85,6 +85,12 @@
                         }
                     }
                 }
+                .group-ib {
+                    display: flex;
+                    .icon-button {
+                        margin-right: 10px;
+                    }
+                }
             }
         }
 

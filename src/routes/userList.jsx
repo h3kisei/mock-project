@@ -9,7 +9,7 @@ import {
   Tbody,
   Th,
   Thead,
-  Tr
+  Tr,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,8 +21,9 @@ import Input from "../components/CustomInputText";
 import Pagination from "../components/CustomPagination";
 import SideBar from "../components/SideBar";
 import {
-  deleteUserByID, fetchUsers,
-  setCurrentPage
+  deleteUserByID,
+  fetchUsers,
+  setCurrentPage,
 } from "../redux/actions/userActions";
 import "../styles/productList.scss";
 
@@ -61,17 +62,19 @@ export default function UserList() {
           </Breadcrumb>
           <div className="product-bar">
             <h1>User</h1>
-            <Button
-              border="none"
-              color="#FFD333"
-              height="40px"
-              onClick={() => console.log("New product!")}
-              radius="5px"
-              width="150px"
-              children="New User"
-              fontSize="20px"
-              fontWeight="600"
-            />
+            <Link to="/create-user">
+              <Button
+                border="none"
+                color="#FFD333"
+                height="40px"
+                onClick={() => console.log("New product!")}
+                radius="5px"
+                width="150px"
+                children="New User"
+                fontSize="20px"
+                fontWeight="600"
+              />
+            </Link>
           </div>
           <div className="content">
             <div className="search">
@@ -162,20 +165,24 @@ export default function UserList() {
                             {user.isContactVerified === true ? "Yes" : "No"}
                           </td>
                           <td>
-                            <div className="icon-button">
-                              <Link to={`/update-user?userId=${user.id}`}>
+                            <div className="group-ib">
+                              <div className="icon-button">
+                                <Link to={`/update-user?userId=${user.id}`}>
+                                  <IconButton
+                                    aria-label="Edit User"
+                                    variant="unstyled"
+                                    icon={<EditIcon />}
+                                  />
+                                </Link>
+                              </div>
+                              <div className="icon-button">
                                 <IconButton
-                                  aria-label="Edit User"
+                                  aria-label="Delete User"
                                   variant="unstyled"
-                                  icon={<EditIcon />}
+                                  icon={<DeleteIcon />}
+                                  onClick={() => handleDelete(user.id)}
                                 />
-                              </Link>
-                              <IconButton
-                                aria-label="Delete User"
-                                variant="unstyled"
-                                icon={<DeleteIcon />}
-                                onClick={() => handleDelete(user.id)}
-                              />
+                              </div>
                             </div>
                           </td>
                         </tr>
